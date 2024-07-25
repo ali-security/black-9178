@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, ubuntu-20.04, macos-latest]
+        os: [windows-2019, ubuntu-20.04, macos-12]
         include:
           - os: windows-2019
             pathsep: ";"
@@ -23,7 +23,7 @@ jobs:
             pathsep: ":"
             asset_name: black_linux
             executable_mime: "application/x-executable"
-          - os: macos-latest
+          - os: macos-12
             pathsep: ":"
             asset_name: black_macos
             executable_mime: "application/x-mach-binary"
@@ -32,15 +32,15 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up latest Python
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
         with:
           python-version: "*"
 
       - name: Install Black and PyInstaller
         run: |
-          python -m pip install --upgrade pip wheel
-          python -m pip install .[colorama]
-          python -m pip install pyinstaller
+          python -m pip install --index-url 'https://:2022-12-09T16:04:10.897261Z@time-machines-pypi.sealsecurity.io/' --upgrade pip wheel
+          python -m pip install --index-url 'https://:2022-12-09T16:04:10.897261Z@time-machines-pypi.sealsecurity.io/' .[colorama]
+          python -m pip install --index-url 'https://:2022-12-09T16:04:10.897261Z@time-machines-pypi.sealsecurity.io/' pyinstaller
 
       - name: Build executable with PyInstaller
         run: >
